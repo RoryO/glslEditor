@@ -7,6 +7,7 @@ var livereload = require('gulp-livereload');
 var plumber = require('gulp-plumber');
 var sourcemaps = require('gulp-sourcemaps');
 var electron = require('electron-connect').server.create();
+let del = require('del');
 
 var paths = {
     styles: 'src/css/**/*.css',
@@ -96,10 +97,16 @@ gulp.task('run', function () {
     gulp.watch(['src/main.js'], electron.restart);
 });
 
-// Build files, do not watch
-gulp.task('build', ['css', 'js']);
+gulp.task('clean', function() {
+    del([
+        'build/*'
+    ]);
+});
 
-gulp.task('electron', ['css', 'js', 'watch', 'run']);
+// Build files, do not watch
+gulp.task('build', ['clean', 'css', 'js']);
+
+gulp.task('electron', ['clean', 'css', 'js', 'watch', 'run']);
 
 // The default task (called when you run `gulp` from cli)
 gulp.task('default', ['css', 'js', 'watch']);

@@ -9,7 +9,6 @@
     "start": "electron .",
     "package-local": "electron-packager . --out ./build --overwrite",
     "package-all": "electron-packager . --out ./build --overwrite --all",
-    "postinstall": "ln -nsf ../src/js node_modules/app",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint *.js src/"
   },
@@ -34,6 +33,7 @@
     "browserify": "^11.2.0",
     "browserify-shim": "^3.8.11",
     "csswring": "^4.0.0",
+    "del": "^3.0.0",
     "electron": "^1.6.5",
     "electron-connect": "^0.6.1",
     "electron-packager": "^8.6.0",
