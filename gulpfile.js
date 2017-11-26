@@ -109,4 +109,4 @@ gulp.task('build', ['clean', 'css', 'js']);
 gulp.task('electron', ['clean', 'css', 'js', 'watch', 'run']);
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['css', 'js', 'watch']);
+gulp.task('default', ['clean', 'css', 'js', 'watch']);
