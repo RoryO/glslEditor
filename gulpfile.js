@@ -15,7 +15,7 @@ var paths = {
 };
 
 // Build stylesheets
-gulp.task('css', function () {
+gulp.task('css', ['clean'], function () {
     var postcss = require('gulp-postcss');
     var autoprefixer = require('autoprefixer');
     var cssimport = require('postcss-import');
@@ -48,7 +48,7 @@ gulp.task('css', function () {
 });
 
 // Build Javascripts
-gulp.task('js', function () {
+gulp.task('js', ['clean'], function () {
     var browserify = require('browserify');
     var shim = require('browserify-shim');
     var babelify = require('babelify');
@@ -89,7 +89,7 @@ gulp.task('watch', function () {
     gulp.watch(paths.scripts, ['js']);
 });
 
-gulp.task('run', function () {
+gulp.task('run', ['build'], function () {
     // Start browser process
     electron.start();
     // Reload browser process
@@ -98,15 +98,15 @@ gulp.task('run', function () {
 });
 
 gulp.task('clean', function() {
-    del([
+    return del([
         'build/*'
     ]);
 });
 
 // Build files, do not watch
-gulp.task('build', ['clean', 'css', 'js']);
+gulp.task('build', ['css', 'js']);
 
-gulp.task('electron', ['clean', 'css', 'js', 'watch', 'run']);
+gulp.task('electron', ['build', 'watch', 'run']);
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['clean', 'css', 'js', 'watch']);
+gulp.task('default', ['build', 'watch']);
